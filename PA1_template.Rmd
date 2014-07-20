@@ -12,20 +12,11 @@ The data consists of two months of data from an anonymous individual collected d
 ## Loading and preprocessing data
 Data file downloaded from the course website.
 The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.
-
-```{r,echo=TRUE}
-read_data <- function() {
-    fname = "activity.zip"
-    source_url = "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
-    if(!file.exists(fname)) {
-        download.file(source_url, destfile=fname, method="curl")
-    }con <- unz(fname, "activity.csv")
-    tbl <- read.csv(con, header=T, colClasses=c("numeric", "character", "numeric"))
-    tbl$interval <- factor(tbl$interval)
-    tbl$date <- as.Date(tbl$date, format="%Y-%m-%d")
-}
-data <- read_data()
+```{r loaddata}
+unzip(zipfile="activity.zip")
+data <- read.csv("activity.csv")
 ```
+
 
 ## What is mean total number of steps taken per day?
 Below histogram shows total number of steps taken each day.
